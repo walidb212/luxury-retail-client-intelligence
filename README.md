@@ -7,6 +7,7 @@ This public repository is a portfolio-safe snapshot of a larger internal-style s
 ## What This Project Does
 
 - ingests free-form advisor notes from API or UI
+- supports audio-to-text transcription before structured analysis
 - cleans and normalizes multilingual text
 - masks sensitive information before provider-backed processing
 - routes each note to an appropriate extraction tier
@@ -18,6 +19,9 @@ This public repository is a portfolio-safe snapshot of a larger internal-style s
 
 ### NLP and Extraction
 
+- speech-to-text ingestion through the transcription API
+- optional backend transcription with Groq Whisper or Mistral Voxtral
+- optional frontend-local transcription flow for lightweight demos
 - multilingual note cleaning with filler removal and privacy masking
 - deterministic Tier 1 rules for simple notes
 - optional LangExtract-based extraction path
@@ -37,6 +41,7 @@ This public repository is a portfolio-safe snapshot of a larger internal-style s
 - FastAPI backend with health endpoints and middleware
 - React 18 frontend with advisor / manager / admin views
 - JWT-based authentication and role checks
+- audio transcription endpoints for note capture workflows
 - optional WebSocket pipeline visualization
 - optional GraphQL endpoint when `strawberry-graphql` is installed
 
@@ -54,12 +59,13 @@ Representative examples live in [`examples/sample_notes.csv`](examples/sample_no
 ## Architecture at a Glance
 
 1. a note enters via the API or frontend
-2. text cleaning normalizes the input and masks PII
-3. the router selects a low-cost deterministic or provider-backed path
-4. extraction produces a structured 4-pillar payload
-5. optional product matching enriches the result
-6. optional recommendation logic proposes a Next Best Action
-7. results are stored and rendered in the frontend
+2. audio can be transcribed into text through the transcription layer
+3. text cleaning normalizes the input and masks PII
+4. the router selects a low-cost deterministic or provider-backed path
+5. extraction produces a structured 4-pillar payload
+6. optional product matching enriches the result
+7. optional recommendation logic proposes a Next Best Action
+8. results are stored and rendered in the frontend
 
 High-level architecture details are documented in [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
 
@@ -78,6 +84,7 @@ High-level architecture details are documented in [`docs/ARCHITECTURE.md`](docs/
 | --- | --- |
 | Backend | FastAPI, SQLAlchemy, Pydantic |
 | Frontend | React 18, Vite, TailwindCSS |
+| Speech-to-Text | Groq Whisper hooks, Mistral Voxtral hooks, frontend-local transcription helpers |
 | NLP / LLM | rule-based extraction, LangExtract hooks, Mistral hooks, OpenAI fallback hooks |
 | Retrieval | sentence-transformers hooks, local ZVec-compatible matcher, vector search entry points |
 | Storage | SQLite by default |
@@ -148,6 +155,7 @@ The default public path is intentionally lightweight:
 - the API can start without provider keys
 - the core install path does not require an external `zvec` package
 - advanced provider-backed features live behind optional dependencies and env flags
+- transcription falls back to mock/demo behavior when no STT provider key is configured
 
 ## Security and Privacy
 

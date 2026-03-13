@@ -5,18 +5,21 @@
 The system processes advisor notes through a layered pipeline:
 
 1. input note arrives through API or UI
-2. text cleaning normalizes content and masks sensitive data
-3. router selects the cheapest acceptable extraction tier
-4. extraction produces a 4-pillar structured payload
-5. optional product matching enriches the result
-6. optional recommendation logic generates a Next Best Action
-7. the API stores results and the frontend renders advisor / manager / admin views
+2. audio inputs can be transcribed into text through the STT layer
+3. text cleaning normalizes content and masks sensitive data
+4. router selects the cheapest acceptable extraction tier
+5. extraction produces a 4-pillar structured payload
+6. optional product matching enriches the result
+7. optional recommendation logic generates a Next Best Action
+8. the API stores results and the frontend renders advisor / manager / admin views
 
 ## Main Components
 
 - `api/main.py`: FastAPI app, middleware, health endpoints, CORS, router registration
 - `api/routers/`: auth, analysis, results, stats, dashboard, batch processing
+- `api/routers/transcribe.py`: audio transcription and speech utilities
 - `src/pipeline_async.py`: orchestration across cleaning, routing, extraction, retrieval, and recommendation
+- `src/transcriber.py`: speech-to-text provider integration layer
 - `src/smart_router.py`: heuristic routing between deterministic and LLM-backed tiers
 - `src/tier1_rules.py`: fast deterministic extraction for simple notes
 - `src/tier2_langextract.py` and `src/tier2_mistral.py`: provider-backed extraction paths
