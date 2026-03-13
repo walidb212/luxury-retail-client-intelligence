@@ -1,8 +1,22 @@
 # Luxury Retail Client Intelligence
 
-FastAPI + React project that transforms client advisor notes into structured CRM intelligence for luxury retail teams.
+Portfolio-ready AI pipeline for luxury retail CRM.
+
+This FastAPI + React project turns raw advisor inputs, including speech-to-text notes, into structured client intelligence: product signals, client profile context, hospitality cues, and concrete next actions.
 
 This public repository is a portfolio-safe snapshot of a larger internal-style system. It keeps the product, pipeline, and engineering decisions visible without exposing private datasets, production URLs, or internal documentation.
+
+## Why This Repo Is Worth Opening
+
+- end-to-end flow from audio or text input to structured CRM output
+- clear product framing, not just isolated model experiments
+- privacy-aware processing with masking before provider-backed steps
+- multiple extraction strategies: deterministic, LangExtract-based, and LLM-backed
+- recruiter-friendly local validation path with a lightweight default install
+
+## In One Flow
+
+`audio or text` -> `transcription` -> `PII masking and cleaning` -> `tiered extraction` -> `4-pillar CRM schema` -> `product matching` -> `Next Best Action`
 
 ## What This Project Does
 
