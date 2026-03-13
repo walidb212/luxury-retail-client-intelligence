@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-labelledby="title desc">
+  <title id="title">Luxury Retail Voice CRM preview</title>
+  <desc id="desc">Abstract preview of the advisor and manager UI used in the public portfolio snapshot.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#0c1929"/>
+      <stop offset="100%" stop-color="#18283b"/>
+    </linearGradient>
+    <linearGradient id="card" x1="0" x2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.04"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="720" fill="url(#bg)"/>
+  <rect x="40" y="40" width="320" height="640" rx="28" fill="#0f2235" stroke="#ffffff" stroke-opacity="0.08"/>
+  <rect x="400" y="40" width="840" height="640" rx="28" fill="#0f2235" stroke="#ffffff" stroke-opacity="0.08"/>
+  <text x="84" y="108" fill="#e8d7a7" font-size="28" font-family="Arial, sans-serif" font-weight="700">Luxury Retail Voice CRM</text>
+  <text x="84" y="140" fill="#9db0c3" font-size="15" font-family="Arial, sans-serif">Advisor, manager and admin workflows</text>
+  <rect x="84" y="186" width="232" height="80" rx="18" fill="url(#card)" stroke="#ffffff" stroke-opacity="0.08"/>
+  <rect x="84" y="286" width="232" height="80" rx="18" fill="url(#card)" stroke="#ffffff" stroke-opacity="0.08"/>
+  <rect x="84" y="386" width="232" height="80" rx="18" fill="url(#card)" stroke="#ffffff" stroke-opacity="0.08"/>
+  <rect x="84" y="486" width="232" height="140" rx="18" fill="url(#card)" stroke="#ffffff" stroke-opacity="0.08"/>
+  <text x="108" y="230" fill="#ffffff" font-size="18" font-family="Arial, sans-serif">Voice capture</text>
+  <text x="108" y="330" fill="#ffffff" font-size="18" font-family="Arial, sans-serif">Routing and RGPD</text>
+  <text x="108" y="430" fill="#ffffff" font-size="18" font-family="Arial, sans-serif">4-pillar extraction</text>
+  <text x="108" y="530" fill="#ffffff" font-size="18" font-family="Arial, sans-serif">RAG + next best action</text>
+  <rect x="450" y="96" width="320" height="132" rx="22" fill="url(#card)" stroke="#ffffff" stroke-opacity="0.1"/>
+  <rect x="794" y="96" width="380" height="132" rx="22" fill="url(#card)" stroke="#ffffff" stroke-opacity="0.1"/>
+  <rect x="450" y="256" width="724" height="168" rx="22" fill="url(#card)" stroke="#ffffff" stroke-opacity="0.1"/>
+  <rect x="450" y="450" width="352" height="176" rx="22" fill="url(#card)" stroke="#ffffff" stroke-opacity="0.1"/>
+  <rect x="822" y="450" width="352" height="176" rx="22" fill="url(#card)" stroke="#ffffff" stroke-opacity="0.1"/>
+  <text x="482" y="142" fill="#9db0c3" font-size="14" font-family="Arial, sans-serif">Advisor flow</text>
+  <text x="482" y="182" fill="#ffffff" font-size="28" font-family="Arial, sans-serif">Live note analysis</text>
+  <text x="482" y="208" fill="#9db0c3" font-size="14" font-family="Arial, sans-serif">capture, review, run, inspect</text>
+  <text x="826" y="142" fill="#9db0c3" font-size="14" font-family="Arial, sans-serif">Manager flow</text>
+  <text x="826" y="182" fill="#ffffff" font-size="28" font-family="Arial, sans-serif">Opportunities dashboard</text>
+  <text x="826" y="208" fill="#9db0c3" font-size="14" font-family="Arial, sans-serif">priority queue, alerts, rankings</text>
+  <text x="482" y="302" fill="#9db0c3" font-size="14" font-family="Arial, sans-serif">Structured output</text>
+  <text x="482" y="342" fill="#ffffff" font-size="22" font-family="Arial, sans-serif">Product, profile, care, business action</text>
+  <text x="482" y="372" fill="#9db0c3" font-size="14" font-family="Arial, sans-serif">routing metadata, privacy flags, matched products, NBA</text>
+  <text x="482" y="496" fill="#9db0c3" font-size="14" font-family="Arial, sans-serif">Sample assets</text>
+  <text x="482" y="536" fill="#ffffff" font-size="22" font-family="Arial, sans-serif">Clean public input/output examples</text>
+  <text x="482" y="566" fill="#9db0c3" font-size="14" font-family="Arial, sans-serif">no internal datasets, no live production URLs</text>
+  <text x="854" y="496" fill="#9db0c3" font-size="14" font-family="Arial, sans-serif">Local-first setup</text>
+  <text x="854" y="536" fill="#ffffff" font-size="22" font-family="Arial, sans-serif">FastAPI + Vite with optional providers</text>
+  <text x="854" y="566" fill="#9db0c3" font-size="14" font-family="Arial, sans-serif">unit tests by default, integration tests opt-in</text>
+</svg>

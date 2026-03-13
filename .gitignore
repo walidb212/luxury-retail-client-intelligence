@@ -1,0 +1,82 @@
+# Environment
+.env
+.env.local
+.env.production
+frontend-v2/.env
+
+# Node.js
+node_modules/
+**/node_modules/
+dist/
+**/dist/
+build/
+**/build/
+frontend-v2/playwright-report/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+*.egg-info/
+.eggs/
+venv/
+.venv/
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+test/
+
+# Databases and local state
+*.db
+*.sqlite
+*.sqlite3
+token.txt
+
+# Generated artifacts
+logs/
+output/
+outputs/
+cache/
+data/raw/
+data/processed/
+data/reports/
+data/vector_store/
+models/*.pkl
+models/*.joblib
+models/*metadata.json
+*.csv
+*.xlsx
+*.jsonl
+*.parquet
+*.npy
+*.html
+
+# Allowlist tracked examples/config
+!examples/*.csv
+!examples/*.json
+!examples/*.svg
+!config/*.csv
+!frontend-v2/index.html
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Auto Claude (Antigravity)
+.auto-claude/
+.auto-claude-security.json
+.auto-claude-status
+.claude_settings.json
+.worktrees/
+.security-key
+logs/security/
+brain/
+

@@ -1,0 +1,139 @@
+from sqlalchemy import Boolean, CheckConstraint, Column, DateTime, Float, ForeignKey, Index, Integer, String, Text, UniqueConstraint, LargeBinary
+from sqlalchemy.orm import relationship
+from datetime import datetime
+from .database import Base
+
+
+class User(Base):
+    __tablename__ = "users"
+    __table_args__ = (
+        CheckConstraint(
+            "role IN ('advisor', 'manager', 'admin')",
+            name="ck_users_role_valid",
+        ),
+    )
+
+    id = Column(Integer, primary_key=True, index=True)
+    email = Column(String, unique=True, index=True)
+    hashed_password = Column(String)
+    full_name = Column(String)
+    role = Column(String, nullable=False, default="advisor") # "advisor", "manager", "admin"
+    score = Column(Integer, default=0)
+    store = Column(String, nullable=True)
+
+    notes = relationship("Note", back_populates="advisor")
+
+
+class Client(Base):
+    __tablename__ = "clients"
+    __table_args__ = (
+        CheckConstraint(
+            "category IN ('Regular', 'Premium', 'VIC', 'Ultimate')",
+            name="ck_clients_category_valid",
+        ),
+        Index("ix_clients_external_id", "external_client_id"),
+    )
+
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String, index=True)
+    external_client_id = Column(String, unique=True, index=True, nullable=True)
+    category = Column(String, default="Regular", index=True)
+    vic_status = Column(String, default="Standard", index=True)
+    total_spent = Column(Float, default=0.0)
+    sentiment_score = Column(Float, default=0.0, index=True)
+    sentiment_history = Column(Text, default="[]")
+    total_interactions = Column(Integer, default=0)
+    last_interaction = Column(DateTime, default=datetime.utcnow)
+    last_contact_date = Column(DateTime, nullable=True, index=True)
+    days_since_contact = Column(Integer, default=0)
+
+    notes = relationship("Note", back_populates="client")
+
+
+class Note(Base):
+    __tablename__ = "notes"
+    __table_args__ = (
+        Index("ix_notes_advisor_timestamp", "advisor_id", "timestamp"),
+        Index("ix_notes_client_timestamp", "client_id", "timestamp"),
+        Index("ix_notes_timestamp_desc", "timestamp"),
+    )
+
+    id = Column(Integer, primary_key=True, index=True)
+    advisor_id = Column(Integer, ForeignKey("users.id"), index=True)
+    client_id = Column(Integer, ForeignKey("clients.id"), index=True)
+
+    transcription = Column(Text)
+    analysis_json = Column(Text)
+    points_awarded = Column(Integer, default=0, index=True)
+    timestamp = Column(DateTime, default=datetime.utcnow, index=True)
+    sentiment_score = Column(Float, default=0.0, index=True)
+    event_invitation_sent = Column(Boolean, default=False, index=True)
+
+    advisor = relationship("User", back_populates="notes")
+    client = relationship("Client", back_populates="notes")
+    opportunity_action = relationship("OpportunityAction", back_populates="note", uselist=False)
+
+
+class Feedback(Base):
+    __tablename__ = "feedback"
+
+    id = Column(Integer, primary_key=True, index=True)
+    note_id = Column(String, index=True)
+    advisor_id = Column(String, nullable=True)
+    original_text = Column(Text, nullable=False)
+    predicted_tags_json = Column(Text, default="[]")
+    corrected_tags_json = Column(Text, default="[]")
+    corrections_json = Column(Text, default="{}")
+    rating = Column(Integer, default=3, index=True)
+    comment = Column(Text, nullable=True)
+    processing_tier = Column(Integer, default=1, index=True)
+    actual_tier = Column(Integer, nullable=True)
+    routing_correct = Column(Boolean, nullable=True)
+    created_at = Column(DateTime, default=datetime.utcnow, index=True)
+
+
+class OpportunityAction(Base):
+    __tablename__ = "opportunity_actions"
+    __table_args__ = (
+        UniqueConstraint("note_id", name="uq_opportunity_actions_note"),
+        CheckConstraint(
+            "status IN ('open', 'planned', 'done')",
+            name="ck_opportunity_actions_status_valid",
+        ),
+        CheckConstraint(
+            "action_type IN ('open', 'call', 'schedule', 'assign', 'other')",
+            name="ck_opportunity_actions_type_valid",
+        ),
+    )
+
+    id = Column(Integer, primary_key=True, index=True)
+    note_id = Column(Integer, ForeignKey("notes.id"), nullable=False, index=True)
+    manager_id = Column(Integer, ForeignKey("users.id"), nullable=False, index=True)
+    action_type = Column(String, nullable=False, default="open")
+    status = Column(String, nullable=False, default="open", index=True)
+    details = Column(Text, nullable=True)
+    created_at = Column(DateTime, default=datetime.utcnow, index=True)
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+
+    note = relationship("Note", back_populates="opportunity_action")
+    manager = relationship("User")
+
+
+class Product(Base):
+    __tablename__ = "products"
+
+    id = Column(Integer, primary_key=True, index=True)
+    sku = Column(String, unique=True, index=True, nullable=False)
+    name = Column(String, nullable=False)
+    url = Column(String)
+    image_url = Column(String)
+    price_eur = Column(Float, default=0.0)
+    category1 = Column(String, index=True)
+    category2 = Column(String)
+    category3 = Column(String)
+    is_discount = Column(Boolean, default=False)
+    stock = Column(Integer, default=10)
+    embedding = Column(LargeBinary, nullable=True)
+    rag_indexed = Column(Boolean, default=False)
+    created_at = Column(DateTime, default=datetime.utcnow)
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)

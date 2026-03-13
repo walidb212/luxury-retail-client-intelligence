@@ -1,0 +1,71 @@
+{
+  "id": "SAMPLE_001",
+  "routing": {
+    "tier": 2,
+    "confidence": 0.86,
+    "reason": "Gift intent with budget, product preferences, and follow-up context."
+  },
+  "rgpd": {
+    "contains_sensitive": false,
+    "categories_detected": []
+  },
+  "pilier_1_univers_produit": {
+    "categories": [
+      "leather_goods"
+    ],
+    "produits_mentionnes": [
+      "structured handbag"
+    ],
+    "usage": [
+      "work",
+      "travel"
+    ],
+    "preferences": {
+      "colors": [
+        "black"
+      ],
+      "materials": [
+        "leather"
+      ]
+    },
+    "matched_products": [
+      {
+        "name": "Structured Leather Tote",
+        "category": "handbags",
+        "match_score": 0.91
+      }
+    ]
+  },
+  "pilier_2_profil_client": {
+    "purchase_context": {
+      "behavior": "premium",
+      "events": [
+        "birthday_gift"
+      ]
+    }
+  },
+  "pilier_3_hospitalite_care": {
+    "occasion": "birthday"
+  },
+  "pilier_4_action_business": {
+    "budget_specific": 4500,
+    "urgency": "medium",
+    "next_best_action": {
+      "action_type": "follow_up",
+      "description": "Prepare 2-3 black leather options and schedule a follow-up next week.",
+      "priority": "high"
+    }
+  },
+  "meta_analysis": {
+    "quality_score": 0.89,
+    "missing_info": [],
+    "risk_flags": []
+  },
+  "tags": [
+    "leather_goods",
+    "black",
+    "leather",
+    "birthday_gift",
+    "follow_up"
+  ]
+}
